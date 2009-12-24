@@ -15,7 +15,7 @@
 	  (box2d-lite feature-pair)
 	  (box2d-lite compute-incident-edge)
 	  (box2d-lite clip-segment-to-line)
-	  (xitomatl debug)
+
 	  )
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -11,7 +11,6 @@
 	  (box2d-lite clip-vertex)
 	  (box2d-lite feature-pair)
 
-	  (xitomatl debug)
 	  )
 
   (define (clip-segment-to-line v-out v-in normal offset clip-edge)
