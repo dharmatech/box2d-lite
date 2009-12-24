@@ -33,7 +33,7 @@
 
 (define bodies '())
 
-(define time-step (/ 1.0 60.0))
+(define time-step 0.004)
 
 (define world (make-world #f #f #f (make-vec 0.0 -10.0) 10))
 
