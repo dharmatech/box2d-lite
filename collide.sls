@@ -14,9 +14,7 @@
 	  (box2d-lite clip-vertex)
 	  (box2d-lite feature-pair)
 	  (box2d-lite compute-incident-edge)
-	  (box2d-lite clip-segment-to-line)
-
-	  )
+	  (box2d-lite clip-segment-to-line))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -31,8 +29,6 @@
 
     (is-body body-a)
     (is-body body-b)
-
-    ;; (display "collide ")
 
     (let ((ha (n*v 0.5 body-a.width))
 	  (hb (n*v 0.5 body-b.width))
@@ -71,8 +67,6 @@
 	    (is-vec face-a)
 	    (is-vec face-b)
 
-	    ;; (say "face-a 	      	" face-a)
-
 	    (if (or (> face-a.x 0.0)
 		    (> face-a.y 0.0)
 		    (> face-b.x 0.0)
@@ -86,14 +80,7 @@
 
 		      (relative-tol 0.95)
 		      (absolute-tol 0.01))
-
-		  ;; (say "pos-a		" pos-a)
-		  ;; (say "pos-b		" pos-b)
-		  ;; (say "dp		" dp)
-		  ;; (say "dp		" dp)
-		  ;; (say "rot-at		" rot-at)
-		  ;; (say "da		" da)
-
+		  
 		  (set! axis FACE-A-X)
 
 		  (set! separation face-a.x)
@@ -102,13 +89,9 @@
 			(v*n rot-a.col-1
 			     (if (> da.x 0.0) 1 -1)))
 
-		  ;; (say "normal		" normal)
-
 		  (if (> face-a.y (+ (* relative-tol separation)
 				     (* absolute-tol ha.y)))
 		      (begin
-			;; (say "********** BRANCH A **********")
-			;; (say "da.y		" da.y)
 			(set! axis       FACE-A-Y)
 			(set! separation face-a.y)
 			(set! normal     (v*n rot-a.col-2
@@ -117,7 +100,6 @@
 		  (if (> face-b.x (+ (* relative-tol separation)
 				     (* absolute-tol hb.x)))
 		      (begin
-			;; (say "********** BRANCH B **********")
 			(set! axis       FACE-B-X)
 			(set! separation face-b.x)
 			(set! normal     (v*n rot-b.col-1
@@ -126,17 +108,13 @@
 		  (if (> face-b.y (+ (* relative-tol separation)
 				     (* absolute-tol hb.y)))
 		      (begin
-			;; (say "********** BRANCH C **********")
 			(set! axis       FACE-B-Y)
 			(set! separation face-b.y)
 			(set!            normal (v*n rot-b.col-2
 						     (if (> db.y 0.0) 1 -1)))))
 
-		  (let (
-			(front-normal #f)
+		  (let ((front-normal #f)
 			(side-normal  #f)
-
-			;; (incident-edge (make-vector 2))
 
 			(incident-edge
 			 (vector
@@ -145,18 +123,12 @@
 			  (make-clip-vertex (make-vec 0 0)
 					    (make-feature-pair (create-edges) 0))))
 
-			;; (incident-edge (vector (create-clip-vertex)
-			;; 		       (create-clip-vertex)))
-			
 			(front #f)
 			(neg-side #f)
 			(pos-side #f)
 			(neg-edge #f)
 			(pos-edge #f)
-			(side #f)
-			)
-
-		    ;; (say-expr incident-edge)
+			(side #f))
 
 		    (case axis
 
@@ -224,25 +196,12 @@
 		       (compute-incident-edge
 			incident-edge ha pos-a rot-a front-normal))
 		      )
-
-		    ;; (say-expr incident-edge)
-
+		    
 		    (let ((clip-points-1 (vector (create-clip-vertex)
 						 (create-clip-vertex)))
 
 			  (clip-points-2 (vector (create-clip-vertex)
-						 (create-clip-vertex)))
-
-			  )
-
-		      ;; (say-expr clip-points-2)
-
-		      ;; (say "incident-edge.0.v"
-		      ;; 	   (clip-vertex-v (vector-ref incident-edge 0))
-		      ;; 	   )
-		      ;; (say "incident-edge.1.v"
-		      ;; 	   (clip-vertex-v (vector-ref incident-edge 1))
-		      ;; 	   )
+						 (create-clip-vertex))))
 
 		      (if (< (clip-segment-to-line clip-points-1
 						   incident-edge
@@ -264,11 +223,7 @@
 
 			      (do ((num-contacts 0)
 				   (i 0 (+ i 1)))
-				  ((>= i 2)
-				   ;; (say "num-contacts		" num-contacts)
-				   num-contacts)
-
-				;; (say-expr clip-points-2)
+				  ((>= i 2) num-contacts)
 
 				(let ()
 
@@ -282,24 +237,6 @@
 					 (- (vec-dot front-normal clip-points-2.i.v)
 					    front)))
 
-				    ;; (say "clip-points-1.0.v		"
-				    ;; 	 (clip-vertex-v (vector-ref clip-points-1 0)))
-
-				    ;; (say "clip-points-1.1.v		"
-				    ;; 	 (clip-vertex-v (vector-ref clip-points-1 1)))
-
-				    ;; (say "clip-points-2.0.v		"
-				    ;; 	 (clip-vertex-v (vector-ref clip-points-2 0)))
-
-				    ;; (say "clip-points-2.1.v		"
-				    ;; 	 (clip-vertex-v (vector-ref clip-points-2 1)))
-
-				    
-				    ;; (say "i		" i)
-				    ;; (say "front-normal		" front-normal)
-				    ;; (say "clip-points-2.i.v     " clip-points-2.i.v)
-				    ;; (say "separation		" separation)
-
 				    (if (<= separation 0)
 
 					(begin
@@ -309,8 +246,6 @@
 					  (contacts.num-contacts.position!
 					   (v- clip-points-2.i.v
 					       (n*v separation front-normal)))
-
-					  ;; (say-expr clip-points-2.i.fp)
 
 					  (contacts.num-contacts.feature!
 					   clip-points-2.i.fp)

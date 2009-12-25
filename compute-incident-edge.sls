@@ -12,8 +12,7 @@
 	  (box2d-lite mat)
 	  (box2d-lite clip-vertex)
 	  (box2d-lite feature-pair)
-	  (box2d-lite edge-numbers)
-	  )
+	  (box2d-lite edge-numbers))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -31,8 +30,6 @@
 
     (is-mat rot)
 
-    ;; (say "compute-incident-edge")
-
     (let ((rot-t (rot.transpose)))
 
       (let ((n (vec::neg (m*v rot-t normal))))
@@ -41,8 +38,6 @@
 	  
 	  (is-vec n)
 	  (is-vec n-abs)
-
-	  ;; (say "n		" n)
 
 	  (if (> n-abs.x n-abs.y)
 
@@ -117,9 +112,7 @@
 		    (c.i.fp.e.out-edge-2! EDGE4)))))))
 
     (set! i 0) (c.i.v! (v+ pos (m*v rot c.i.v)))
-    (set! i 1) (c.i.v! (v+ pos (m*v rot c.i.v)))
-
-    )
+    (set! i 1) (c.i.v! (v+ pos (m*v rot c.i.v))))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
