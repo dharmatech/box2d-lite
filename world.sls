@@ -1,23 +1,10 @@
 
 (library (box2d-lite world)
 
-  (export make-world
-
-	  is-world
-	  import-world
-
-	  world::step
-
-	  ;; for testing
-
-	  world::broad-phase
-
+  (export make-world is-world import-world
 	  world-bodies
 	  world-joints
-	  world-arbiters
-	  world-gravity
-	  world-iterations
-	  )
+	  world::step)
 
   (import (except (rnrs) remove)
 	  (only (srfi :1 lists) remove)
@@ -26,23 +13,16 @@
 	  (box2d-lite vec)
 	  (box2d-lite body)
 	  (box2d-lite joint)
-	  (box2d-lite arbiter)
-
-	  ;; for testing
-	  (box2d-lite contact)
-	  (box2d-lite feature-pair)
-	  
-	  )
+	  (box2d-lite arbiter))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (define (say-vec v) (say (vec-x v) "	" (vec-y v)))
+  ;; (define (say-vec v) (say (vec-x v) "	" (vec-y v)))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (define-record-type++ world
-    is-world
-    import-world
+  (define-record-type++ world is-world import-world
+    
     (fields (mutable bodies)
 	    (mutable joints)
 	    (mutable arbiters)
@@ -55,10 +35,6 @@
 	     (step      world::step)))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  ;; (define (world::add-body w body)
-  ;;   (is-world w)
-  ;;   (w.bodies! (cons body w.bodies)))
 
   (define (world::add-body w body)
     (is-world w)
@@ -158,22 +134,6 @@
     ;; 	 "joints: " (length (world-joints   w)) "  "
     ;; 	 "arbiters: " (length (world-arbiters w)))
 
-    ;; (if (>= (length (world-bodies w)) 2)
-    ;; 	(say (body-velocity (list-ref (world-bodies w) 1))
-    ;; 	     "	"
-    ;; 	     (body-angular-velocity (list-ref (world-bodies w) 1))))
-
-    ;; (if (>= (length (world-bodies w)) 2)
-    ;; 	(say
-
-    ;; 	 ;; (vec-x (body-velocity (list-ref (world-bodies w) 2)))
-    ;; 	 ;; "	"
-    ;; 	 ;; (vec-y (body-velocity (list-ref (world-bodies w) 2)))
-
-    ;; 	 ;; (body-torque (list-ref (world-bodies w) 1))
-
-    ;; 	 ))
-
     (let ((inv-dt (if (> dt 0.0) (/ 1.0 dt) 0.0)))
 
       (world::broad-phase w)
@@ -184,15 +144,10 @@
 	 (if (= b.inv-mass 0.0)
 	     #t
 	     (begin
-	       
 	       (b.velocity!
 		(v+ b.velocity (n*v dt (v+ gravity (n*v b.inv-mass b.force)))))
 	       (b.angular-velocity!
-		(+ b.angular-velocity (* dt b.inv-i b.torque)))
-
-	       
-	       
-	       )))
+		(+ b.angular-velocity (* dt b.inv-i b.torque))))))
        bodies)
 
       (for-each (lambda (arbiter) (arbiter::pre-step arbiter inv-dt)) arbiters)
