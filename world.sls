@@ -48,9 +48,11 @@
 	    (mutable arbiters)
 	    (mutable gravity)
 	    (mutable iterations))
-    (methods (add-body world::add-body)
-	     (clear world::clear)
-	     (step world::step)))
+    
+    (methods (add-body  world::add-body)
+	     (add-joint world::add-joint)
+	     (clear     world::clear)
+	     (step      world::step)))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -62,6 +64,12 @@
     (is-world w)
     (w.bodies! (append w.bodies (list body))))
 
+  ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (define (world::add-joint w joint)
+    (is-world w)
+    (w.joints! (append w.joints (list joint))))
+  
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (define (world::clear w)

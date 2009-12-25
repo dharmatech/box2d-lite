@@ -1,25 +1,39 @@
 
 (library (box2d-lite joint)
 
-  (export make-joint
+  (export make-joint is-joint import-joint
 
+	  joint-m		joint-m-set!
+	  joint-local-anchor-1  joint-local-anchor-1-set!
+	  joint-local-anchor-2  joint-local-anchor-2-set!
+	  joint-r1		joint-r1-set!
+	  joint-r2		joint-r2-set!
+	  joint-bias		joint-bias-set!
+	  joint-p		joint-p-set!
+	  joint-body-1		joint-body-1-set!
+	  joint-body-2		joint-body-2-set!
+	  joint-bias-factor	joint-bias-factor-set!
+	  joint-softness	joint-softness-set!
+
+	  create-joint
+
+	  joint::set
 	  joint::pre-step
-	  joint::apply-impulse
-	  )
+	  joint::apply-impulse)
 
   (import (rnrs)
 	  (box2d-lite util define-record-type)
 	  (box2d-lite vec)
 	  (box2d-lite mat)
 	  (box2d-lite body)
-	  (box2d-lite world-parameters)
-	  )
+	  (box2d-lite world-parameters))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (define-record-type++ joint
     is-joint
     import-joint
+
     (fields (mutable m)
 	    (mutable local-anchor-1)
 	    (mutable local-anchor-2)
@@ -31,9 +45,49 @@
 	    (mutable body-2)
 	    (mutable bias-factor)
 	    (mutable softness))
-    (methods)
-    )
+    
+    (methods (set           joint::set)
+	     (pre-step      joint::pre-step)
+	     (apply-impulse joint::apply-impulse)))
 
+  ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+  (define (create-joint)
+    (let ((j (make-joint #f #f #f #f #f #f #f #f #f #f #f)))
+      (is-joint j)
+      (j.p!           (make-vec 0.0 0.0))
+      (j.bias-factor! 0.2)
+      (j.softness!    0.0)
+      j))
+
+  ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (define (joint::set j b1 b2 anchor)
+
+    (import-joint j)
+    
+    (is-body body-1)
+    (is-body body-2)
+
+    (body-1! b1)
+    (body-2! b2)
+
+    (local-anchor-1!
+     (m*v (mat::transpose (angle->mat body-1.rotation))
+	  (v- anchor body-1.position)))
+
+    (local-anchor-2!
+     (m*v (mat::transpose (angle->mat body-2.rotation))
+	  (v- anchor body-2.position)))
+    
+    (p! (make-vec 0.0 0.0))
+
+    (softness! 0.0)
+
+    (bias-factor! 0.2)
+
+    j)
+  
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (define (joint::pre-step j inv-dt)
@@ -111,7 +165,7 @@
 	(body-1.angular-velocity!
 	 (- body-1.angular-velocity (* body-1.inv-i (vxv r1 impulse))))
 
-	(body-2.velocity! (v+ body-1.velocity (n*v body-2.inv-mass impulse)))
+	(body-2.velocity! (v+ body-2.velocity (n*v body-2.inv-mass impulse)))
 
 	(body-2.angular-velocity!
 	 (+ body-2.angular-velocity (* body-2.inv-i (vxv r2 impulse))))
