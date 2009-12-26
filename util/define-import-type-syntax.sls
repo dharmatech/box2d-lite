@@ -2,10 +2,10 @@
 (library (box2d-lite util define-import-type-syntax)
 
   (export define-imported-field-syntax
-	  define-import-type-syntax)
+          define-import-type-syntax)
 
   (import (rnrs)
-	  (dharmalab misc gen-id))
+          (dharmalab misc gen-id))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
