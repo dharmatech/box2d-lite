@@ -18,7 +18,7 @@
 (initialize-glut)
 
 (window (size 800 800)
-	(title "Box2d Lite - Pyramid")
+	(title "Box2d Lite - Small Pyramid")
 	(reshape (width height)
 		 (lambda (w h)
 		   (glMatrixMode GL_PROJECTION)
@@ -30,8 +30,6 @@
 (random-source-randomize! default-random-source)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(define bodies '())
 
 (define time-step (/ 1.0 60.0))
 
@@ -57,11 +55,7 @@
 
 	(bomb.friction! 0.2)
 
-	(world.add-body bomb)
-
-	(set! bodies (cons bomb bodies))
-
-	))
+	(world.add-body bomb)))
 
   (bomb.position! (make-vec (+ -15.0 (* (random-real) 30.0))
 			    15.0))
@@ -73,8 +67,6 @@
   (bomb.angular-velocity! (+ -20.0 (* (random-real) 40.0))))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(define draw-body-print-data? #f)
 
 (define (draw-body body)
 
@@ -126,9 +118,7 @@
 
   (b.rotation! 0.0)
 
-  (world.add-body b)
-
-  (set! bodies (cons b bodies)))
+  (world.add-body b))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -156,12 +146,9 @@
 
       (world.add-body b)
 
-      (set! bodies (cons b bodies))
-
       (set! y (v+ y (make-vec 1.125 0.0)))
 
-      (set! b (create-body))
-      )
+      (set! b (create-body)))
 
     (set! x (v+ x (make-vec 0.5625 2.0)))))
 
@@ -171,7 +158,7 @@
  (lambda ()
    (background 0.0)
    (world.step time-step)
-   (for-each draw-body bodies)))
+   (for-each draw-body world.bodies)))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
