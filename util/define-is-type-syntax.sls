@@ -5,7 +5,7 @@
           define-is-type-syntax)
 
   (import (rnrs)
-          (dharmalab misc gen-id))
+          (for (dharmalab misc gen-id) (meta 1)))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
