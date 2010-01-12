@@ -116,12 +116,8 @@
 		  (let ((front-normal #f)
 			(side-normal  #f)
 
-			(incident-edge
-			 (vector
-			  (make-clip-vertex (make-vec 0 0)
-					    (make-feature-pair (create-edges) 0))
-			  (make-clip-vertex (make-vec 0 0)
-					    (make-feature-pair (create-edges) 0))))
+			(incident-edge (vector (create-clip-vertex)
+                                               (create-clip-vertex)))
 
 			(front #f)
 			(neg-side #f)
@@ -248,7 +244,7 @@
 					       (n*v separation front-normal)))
 
 					  (contacts.num-contacts.feature!
-					   clip-points-2.i.fp)
+					   clip-points-2.i.e)
 
 					  (if (or (eq? axis FACE-B-X)
 						  (eq? axis FACE-B-Y))

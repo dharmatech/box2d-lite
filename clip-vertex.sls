@@ -4,10 +4,12 @@
   (export make-clip-vertex
 
 	  clip-vertex-v
-	  clip-vertex-fp
+	  ;; clip-vertex-fp
+          clip-vertex-e
 
 	  clip-vertex-v-set!
-	  clip-vertex-fp-set!
+	  ;; clip-vertex-fp-set!
+          clip-vertex-e-set!
 
 	  is-clip-vertex
 	  import-clip-vertex
@@ -23,11 +25,18 @@
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+  ;; (define-record-type++ clip-vertex
+  ;;   is-clip-vertex
+  ;;   import-clip-vertex
+  ;;   (fields (mutable v)
+  ;;           (mutable fp))
+  ;;   (methods))
+
   (define-record-type++ clip-vertex
     is-clip-vertex
     import-clip-vertex
     (fields (mutable v)
-	    (mutable fp))
+	    (mutable e))
     (methods))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -35,7 +44,7 @@
   (define (create-clip-vertex)
     (make-clip-vertex
      (make-vec 0.0 0.0)
-     (create-feature-pair)))
+     (create-edges)))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

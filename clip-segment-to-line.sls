@@ -15,10 +15,9 @@
 
     (define num-out 0)
 
-    (is-vector       v-out num-out)
-    (is-clip-vertex  v-out.num-out)
-    (is-feature-pair v-out.num-out.fp)
-    (is-edges        v-out.num-out.fp.e)
+    (is-vector      v-out num-out)
+    (is-clip-vertex v-out.num-out)
+    (is-edges       v-out.num-out.e)
 
     (define-syntax v-in.0 (identifier-syntax (vector-ref v-in 0)))
     (define-syntax v-in.1 (identifier-syntax (vector-ref v-in 1)))
@@ -42,14 +41,14 @@
 	    (v-out.num-out.v! (v+ v-in.0.v (n*v interp (v- v-in.1.v v-in.0.v))))
 
 	    (cond ((> distance-0 0.0)
-		   (v-out.num-out.fp!             v-in.0.fp)
-		   (v-out.num-out.fp.e.in-edge-1! clip-edge)
-		   (v-out.num-out.fp.e.in-edge-2! NO-EDGE))
+		   (v-out.num-out.e!           v-in.0.e)
+		   (v-out.num-out.e.in-edge-1! clip-edge)
+		   (v-out.num-out.e.in-edge-2! NO-EDGE))
 
 		  (else
-		   (v-out.num-out.fp!             v-in.1.fp)
-		   (v-out.num-out.fp.e.out-edge-1! clip-edge)
-		   (v-out.num-out.fp.e.out-edge-2! NO-EDGE)))
+		   (v-out.num-out.e!            v-in.1.e)
+		   (v-out.num-out.e.out-edge-1! clip-edge)
+		   (v-out.num-out.e.out-edge-2! NO-EDGE)))
 
 	    (set! num-out (+ num-out 1)))))
 

@@ -20,26 +20,12 @@
 
 	  edges-equal?
 
-	  make-feature-pair
-
-	  feature-pair-e
-	  feature-pair-value
-
-	  feature-pair-e-set!
-	  feature-pair-value-set!
-
-	  is-feature-pair
-	  import-feature-pair
-
-	  create-feature-pair
-
 	  flip)
 
   (import (rnrs)
 	  (srfi :27 random-bits)
 	  (box2d-lite util define-record-type)
-	  (box2d-lite edge-numbers)
-	  )
+	  (box2d-lite edge-numbers))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -69,38 +55,22 @@
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (define-record-type++ feature-pair
-    is-feature-pair
-    import-feature-pair
-    (fields (mutable e)
-	    (mutable value))
-    (methods))
+  (define (flip e)
 
-  ;; (define (create-feature-pair)
-  ;;   (make-feature-pair (make-edges 0 0 0 0) 0))
+    (is-edges e)
 
-  (define (create-feature-pair)
-    (make-feature-pair (create-edges)
-		       (random-integer 1000000000)
-		       ))
+    (let ((tmp e.in-edge-1))
+
+      (e.in-edge-1! e.in-edge-2)
+
+      (e.in-edge-2! tmp))
+
+    (let ((tmp e.out-edge-1))
+
+      (e.out-edge-1! e.out-edge-2)
+
+      (e.out-edge-2! tmp)))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  (define (flip fp)
-
-    (is-feature-pair fp)
-    (is-edges        fp.e)
-
-    (let ((tmp fp.e.in-edge-1))
-
-      (fp.e.in-edge-1! fp.e.in-edge-2)
-
-      (fp.e.in-edge-2! tmp))
-
-    (let ((tmp fp.e.out-edge-1))
-
-      (fp.e.out-edge-1! fp.e.out-edge-2)
-
-      (fp.e.out-edge-2! tmp)))
 
   )

@@ -20,11 +20,10 @@
 
     (define i 0)
 
-    (is-vector       c i)
-    (is-clip-vertex  c.i)
-    (is-vec          c.i.v)
-    (is-feature-pair c.i.fp)
-    (is-edges        c.i.fp.e)
+    (is-vector      c i)
+    (is-clip-vertex c.i)
+    (is-vec         c.i.v)
+    (is-edges       c.i.e)
 
     (is-vec h)
 
@@ -50,14 +49,14 @@
 		    (set! i 0)
 
 		    (c.i.v.set h.x (- h.y))
-		    (c.i.fp.e.in-edge-2!  EDGE3)
-		    (c.i.fp.e.out-edge-2! EDGE4)
+		    (c.i.e.in-edge-2!  EDGE3)
+		    (c.i.e.out-edge-2! EDGE4)
 
 		    (set! i 1)
 		    
 		    (c.i.v.set h.x h.y)
-		    (c.i.fp.e.in-edge-2!  EDGE4)
-		    (c.i.fp.e.out-edge-2! EDGE1))
+		    (c.i.e.in-edge-2!  EDGE4)
+		    (c.i.e.out-edge-2! EDGE1))
 
 		  (begin
 
@@ -66,14 +65,14 @@
 		    (set! i 0)
 
 		    (c.i.v.set (- h.x) h.y)
-		    (c.i.fp.e.in-edge-2!  EDGE1)
-		    (c.i.fp.e.out-edge-2! EDGE2)
+		    (c.i.e.in-edge-2!  EDGE1)
+		    (c.i.e.out-edge-2! EDGE2)
 
 		    (set! i 1)
 		    
 		    (c.i.v.set (- h.x) (- h.y))
-		    (c.i.fp.e.in-edge-2!  EDGE2)
-		    (c.i.fp.e.out-edge-2! EDGE3)
+		    (c.i.e.in-edge-2!  EDGE2)
+		    (c.i.e.out-edge-2! EDGE3)
 
 		    ))
 
@@ -86,14 +85,14 @@
 		    (set! i 0)
 
 		    (c.i.v.set h.x h.y)
-		    (c.i.fp.e.in-edge-2!  EDGE4)
-		    (c.i.fp.e.out-edge-2! EDGE1)
+		    (c.i.e.in-edge-2!  EDGE4)
+		    (c.i.e.out-edge-2! EDGE1)
 
 		    (set! i 1)
 		    
 		    (c.i.v.set (- h.x) h.y)
-		    (c.i.fp.e.in-edge-2!  EDGE1)
-		    (c.i.fp.e.out-edge-2! EDGE2))
+		    (c.i.e.in-edge-2!  EDGE1)
+		    (c.i.e.out-edge-2! EDGE2))
 
 		  (begin
 
@@ -102,14 +101,14 @@
 		    (set! i 0)
 
 		    (c.i.v.set (- h.x) (- h.y))
-		    (c.i.fp.e.in-edge-2!  EDGE2)
-		    (c.i.fp.e.out-edge-2! EDGE3)
+		    (c.i.e.in-edge-2!  EDGE2)
+		    (c.i.e.out-edge-2! EDGE3)
 
 		    (set! i 1)
 		    
 		    (c.i.v.set h.x (- h.y))
-		    (c.i.fp.e.in-edge-2!  EDGE3)
-		    (c.i.fp.e.out-edge-2! EDGE4)))))))
+		    (c.i.e.in-edge-2!  EDGE3)
+		    (c.i.e.out-edge-2! EDGE4)))))))
 
     (set! i 0) (c.i.v! (v+ pos (m*v rot c.i.v)))
     (set! i 1) (c.i.v! (v+ pos (m*v rot c.i.v))))

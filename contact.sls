@@ -32,15 +32,12 @@
 	  contact-bias-set!
 	  contact-feature-set!
 
-	  create-contact
-	  
-	  )
+	  create-contact)
 
   (import (rnrs)
 	  (box2d-lite util define-record-type)
 	  (box2d-lite vec)
-	  (box2d-lite feature-pair)
-	  )
+	  (box2d-lite feature-pair))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -69,8 +66,7 @@
 		  (make-vec 0 0)
 		  (make-vec 0 0)
 		  0 0.0 0.0 0.0 0 0 0
-		  (create-feature-pair)
-		  ))
+                  (create-edges)))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

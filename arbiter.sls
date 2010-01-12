@@ -66,24 +66,8 @@
       (is-body body-1)
       (is-body body-2)
 
-      ;; (feature-pair-value-set! (contact-feature (vector-ref contacts 0))
-      ;; 			       (random-integer 100000000))
-
-      ;; (feature-pair-value-set! (contact-feature (vector-ref contacts 1))
-      ;; 			       (random-integer 100000000))
-
-      ;; (cond ((body-less-than? b1 b2)
-      ;; 	     (body-1! b1)
-      ;; 	     (body-2! b2))
-      ;; 	    (else
-      ;; 	     (body-1! b2)
-      ;; 	     (body-2! b1)))
-
       (body-1! b1)
       (body-2! b2)
-
-      ;; (body-1! b2)
-      ;; (body-2! b1)
 
       (num-contacts! (collide contacts body-1 body-2))
 
@@ -116,8 +100,6 @@
 
     (import-arbiter arb)
 
-    ;; (say "arbiter::update")
-
     (let ((merged-contacts (make-vector 2)))
 
       (do ((i 0 (+ i 1)))
@@ -125,9 +107,9 @@
 
 	(let ()
 
-	  (is-vector       new-contacts i)
-	  (is-contact      new-contacts.i)
-	  (is-feature-pair new-contacts.i.feature)
+	  (is-vector  new-contacts i)
+	  (is-contact new-contacts.i)
+          (is-edges   new-contacts.i.feature)
 
 	  (is-vector  merged-contacts i)
 	  (is-contact merged-contacts.i)
@@ -143,17 +125,12 @@
 
 	      (let ()
 
-		(is-vector       contacts j)
-		(is-contact      contacts.j)
-		(is-feature-pair contacts.j.feature)
+		(is-vector  contacts j)
+		(is-contact contacts.j)
+                (is-edges   contacts.j.feature)
 
-		;; (say "new	" (feature-pair-e new-contacts.i.feature))
-		;; (say "old	" (feature-pair-e contacts.j.feature))
-
-		(if (edges-equal? (feature-pair-e new-contacts.i.feature)
-				  (feature-pair-e contacts.j.feature))
+		(if (edges-equal? new-contacts.i.feature contacts.j.feature)
 		    (begin
-		      ;; (say "k = j	" j)
 		      (set! k j)
 		      (set! stop #t)))))
 
@@ -162,11 +139,7 @@
 		   (cond ((warm-starting)
 			  (merged-contacts.i.pn!  contacts.k.pn)
 			  (merged-contacts.i.pt!  contacts.k.pt)
-			  (merged-contacts.i.pnb! contacts.k.pnb)
-
-			  ;; (say-expr contacts.k.pn)
-			  
-			  )
+			  (merged-contacts.i.pnb! contacts.k.pnb))
 			 (else
 			  (merged-contacts.i.pn!  0.0)
 			  (merged-contacts.i.pt!  0.0)
@@ -184,11 +157,6 @@
 	
 	  (contacts.i! merged-contacts.i)))
 
-      ;; (say "contact[0].feature.e = "
-      ;; 	   (feature-pair-e (contact-feature (vector-ref contacts 0))))
-      ;; (say "contact[1].feature.e = "
-      ;; 	   (feature-pair-e (contact-feature (vector-ref contacts 1))))
-
       (num-contacts! num-new-contacts)))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -198,8 +166,6 @@
 
     (is-body body-1)
     (is-body body-2)
-
-    ;; (say "arbiter::pre-step")
 
     (let ((k-allowed-penetration 0.01)
 	  (k-bias-factor (if (position-correction) 0.2 0.0)))
