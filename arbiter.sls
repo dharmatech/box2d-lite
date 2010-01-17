@@ -34,7 +34,7 @@
 	  (box2d-lite util math)
 	  (box2d-lite vec)
 	  (box2d-lite body)
-	  (box2d-lite feature-pair)
+	  (box2d-lite edges)
 	  (box2d-lite contact)
 	  (box2d-lite collide)
 	  (box2d-lite world-parameters))

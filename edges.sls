@@ -23,7 +23,6 @@
 	  flip)
 
   (import (rnrs)
-	  (srfi :27 random-bits)
 	  (box2d-lite util define-record-type)
 	  (box2d-lite edge-numbers))
 

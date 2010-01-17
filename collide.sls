@@ -12,7 +12,7 @@
 	  (box2d-lite edge-numbers)
 	  (box2d-lite contact)
 	  (box2d-lite clip-vertex)
-	  (box2d-lite feature-pair)
+	  (box2d-lite edges)
 	  (box2d-lite compute-incident-edge)
 	  (box2d-lite clip-segment-to-line))
 

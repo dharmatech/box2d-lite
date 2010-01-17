@@ -9,7 +9,7 @@
 	  (box2d-lite vec)
 	  (box2d-lite edge-numbers)
 	  (box2d-lite clip-vertex)
-	  (box2d-lite feature-pair))
+	  (box2d-lite edges))
 
   (define (clip-segment-to-line v-out v-in normal offset clip-edge)
 

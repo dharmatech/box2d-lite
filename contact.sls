@@ -37,7 +37,7 @@
   (import (rnrs)
 	  (box2d-lite util define-record-type)
 	  (box2d-lite vec)
-	  (box2d-lite feature-pair))
+	  (box2d-lite edges))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
