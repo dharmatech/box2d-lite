@@ -3,15 +3,10 @@
 
   (export make-edges
 
-	  edges-in-edge-1
-	  edges-out-edge-1
-	  edges-in-edge-2
-	  edges-out-edge-2
-
-	  edges-in-edge-1-set!
-	  edges-out-edge-1-set!
-	  edges-in-edge-2-set!
-	  edges-out-edge-2-set!
+	  edges-in-edge-1  edges-in-edge-1-set!
+	  edges-out-edge-1 edges-out-edge-1-set!
+	  edges-in-edge-2  edges-in-edge-2-set!
+	  edges-out-edge-2 edges-out-edge-2-set!
 
 	  is-edges
 	  import-edges
