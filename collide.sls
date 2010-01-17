@@ -113,25 +113,19 @@
 			(set!            normal (v*n rot-b.col-2
 						     (if (> db.y 0.0) 1 -1)))))
 
-		  (let ((front-normal #f)
-			(side-normal  #f)
-
-			(incident-edge (vector (create-clip-vertex)
-                                               (create-clip-vertex)))
-
-			(front #f)
-			(neg-side #f)
-			(pos-side #f)
-			(neg-edge #f)
-			(pos-edge #f)
-			(side #f))
+		  (let ((front-normal  #f)
+			(side-normal   #f)
+			(incident-edge #f)
+			(front         #f)
+			(neg-side      #f)
+			(pos-side      #f)
+			(neg-edge      #f)
+			(pos-edge      #f)
+			(side          #f))
 
 		    (case axis
 
 		      ((FACE-A-X)
-
-		       ;; (display "case FACE-A-X  ")
-		       
 		       (set! front-normal normal)
 		       (set! front        (+ (vec-dot pos-a front-normal) ha.x))
 		       (set! side-normal  rot-a.col-2)
@@ -140,16 +134,10 @@
 		       (set! pos-side     (+ side ha.y))
 		       (set! neg-edge     EDGE3)
 		       (set! pos-edge     EDGE1)
-
-		       (compute-incident-edge
-			incident-edge hb pos-b rot-b front-normal)
-		       
-		       )
+                       (set! incident-edge
+                             (compute-incident-edge hb pos-b rot-b front-normal)))
 
 		      ((FACE-A-Y)
-
-		       ;; (display  "case FACE-A-Y  ")
-		       
 		       (set! front-normal normal)
 		       (set! front        (+ (vec-dot pos-a front-normal) ha.y))
 		       (set! side-normal  rot-a.col-1)
@@ -158,14 +146,10 @@
 		       (set! pos-side     (+ side ha.x))
 		       (set! neg-edge     EDGE2)
 		       (set! pos-edge     EDGE4)
-
-		       (compute-incident-edge
-			incident-edge hb pos-b rot-b front-normal))
+                       (set! incident-edge
+                             (compute-incident-edge hb pos-b rot-b front-normal)))
 
 		      ((FACE-B-X)
-
-		       ;; (display "case FACE-B-X  ")
-
 		       (set! front-normal (vec::neg normal))
 		       (set! front        (+ (vec-dot pos-b front-normal) hb.x))
 		       (set! side-normal  rot-b.col-2)
@@ -174,13 +158,10 @@
 		       (set! pos-side     (+    side  hb.y))
 		       (set! neg-edge     EDGE3)
 		       (set! pos-edge     EDGE1)
-		       (compute-incident-edge
-			incident-edge ha pos-a rot-a front-normal))
+                       (set! incident-edge
+                             (compute-incident-edge ha pos-a rot-a front-normal)))
 
 		      ((FACE-B-Y)
-
-		       ;; (display "case FACE-B-Y  ")
-
 		       (set! front-normal (vec::neg normal))
 		       (set! front        (+ (vec-dot pos-b front-normal) hb.y))
 		       (set! side-normal  rot-b.col-1)
@@ -189,9 +170,8 @@
 		       (set! pos-side     (+    side  hb.x))
 		       (set! neg-edge     EDGE2)
 		       (set! pos-edge     EDGE4)
-		       (compute-incident-edge
-			incident-edge ha pos-a rot-a front-normal))
-		      )
+		       (set! incident-edge
+                             (compute-incident-edge ha pos-a rot-a front-normal))))
 		    
 		    (let ((clip-points-1 (vector (create-clip-vertex)
 						 (create-clip-vertex)))

@@ -16,102 +16,38 @@
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (define (compute-incident-edge c h pos rot normal)
-
-    (define i 0)
-
-    (is-vector      c i)
-    (is-clip-vertex c.i)
-    (is-vec         c.i.v)
-    (is-edges       c.i.e)
+  (define (compute-incident-edge h pos rot normal)
 
     (is-vec h)
 
-    (is-mat rot)
+    (let ((n (vec::neg (m*v (mat::transpose rot) normal))))
 
-    (let ((rot-t (rot.transpose)))
+      (let ((n-abs (vec::abs n)))
+        
+        (is-vec n)
+        (is-vec n-abs)
 
-      (let ((n (vec::neg (m*v rot-t normal))))
+        (define (make-incident-vertex x y in-edge-2 out-edge-2)
+          (make-clip-vertex (v+ pos (m*v rot (make-vec x y)))
+                            (make-edges NO-EDGE NO-EDGE in-edge-2 out-edge-2)))
 
-	(let ((n-abs (vec::abs n)))
-	  
-	  (is-vec n)
-	  (is-vec n-abs)
+        (if (> n-abs.x n-abs.y)
 
-	  (if (> n-abs.x n-abs.y)
+            (if (> (sign n.x) 0.0)
 
-	      (if (> (sign n.x) 0.0)
+                (vector (make-incident-vertex    h.x  (- h.y) EDGE3 EDGE4)
+                        (make-incident-vertex    h.x     h.y  EDGE4 EDGE1))
 
-		  (begin
+                (vector (make-incident-vertex (- h.x)    h.y  EDGE1 EDGE2)
+                        (make-incident-vertex (- h.x) (- h.y) EDGE2 EDGE3)))
 
-		    ;; (say "********** BRANCH A B **********")
+            (if (> (sign n.y) 0.0)
 
-		    (set! i 0)
+                (vector (make-incident-vertex    h.x     h.y  EDGE4 EDGE1)
+                        (make-incident-vertex (- h.x)    h.y  EDGE1 EDGE2))
 
-		    (c.i.v.set h.x (- h.y))
-		    (c.i.e.in-edge-2!  EDGE3)
-		    (c.i.e.out-edge-2! EDGE4)
-
-		    (set! i 1)
-		    
-		    (c.i.v.set h.x h.y)
-		    (c.i.e.in-edge-2!  EDGE4)
-		    (c.i.e.out-edge-2! EDGE1))
-
-		  (begin
-
-		    ;; (say "********** BRANCH A C **********")
-
-		    (set! i 0)
-
-		    (c.i.v.set (- h.x) h.y)
-		    (c.i.e.in-edge-2!  EDGE1)
-		    (c.i.e.out-edge-2! EDGE2)
-
-		    (set! i 1)
-		    
-		    (c.i.v.set (- h.x) (- h.y))
-		    (c.i.e.in-edge-2!  EDGE2)
-		    (c.i.e.out-edge-2! EDGE3)
-
-		    ))
-
-	      (if (> (sign n.y) 0.0)
-
-		  (begin
-
-		    ;; (say "********** BRANCH D E **********")
-
-		    (set! i 0)
-
-		    (c.i.v.set h.x h.y)
-		    (c.i.e.in-edge-2!  EDGE4)
-		    (c.i.e.out-edge-2! EDGE1)
-
-		    (set! i 1)
-		    
-		    (c.i.v.set (- h.x) h.y)
-		    (c.i.e.in-edge-2!  EDGE1)
-		    (c.i.e.out-edge-2! EDGE2))
-
-		  (begin
-
-		    ;; (say "********** BRANCH D F **********")
-
-		    (set! i 0)
-
-		    (c.i.v.set (- h.x) (- h.y))
-		    (c.i.e.in-edge-2!  EDGE2)
-		    (c.i.e.out-edge-2! EDGE3)
-
-		    (set! i 1)
-		    
-		    (c.i.v.set h.x (- h.y))
-		    (c.i.e.in-edge-2!  EDGE3)
-		    (c.i.e.out-edge-2! EDGE4)))))))
-
-    (set! i 0) (c.i.v! (v+ pos (m*v rot c.i.v)))
-    (set! i 1) (c.i.v! (v+ pos (m*v rot c.i.v))))
+                (vector (make-incident-vertex (- h.x) (- h.y) EDGE2 EDGE3)
+                        (make-incident-vertex    h.x  (- h.y) EDGE3 EDGE4)))))))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
