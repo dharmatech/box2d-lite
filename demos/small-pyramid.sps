@@ -5,6 +5,7 @@
 	(srfi :27 random-bits)
 	(gl)
 	(glut)
+        (dharmalab misc limit-call-rate)
 	(agave glamour misc)
 	(agave glamour window)
 	(box2d-lite util math)
@@ -162,7 +163,7 @@
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(glutIdleFunc glutPostRedisplay)
+(glutIdleFunc (limit-call-rate 60 (glutPostRedisplay)))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
