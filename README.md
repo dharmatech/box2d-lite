@@ -1,4 +1,13 @@
 
+# Introduction
+
+[Box2D](http://www.box2d.org) is a physics engine written in C++ by
+Erin Catto. [Box2D Lite](http://box2d.googlecode.com/files/Box2D_Lite.zip)
+is a simpler version which Erin posted to his blog once upon a
+time. This is a port of Box2D Lite to R6RS Scheme.
+
+![dominos screenshot](http://dharmatech.github.com/images/box2d-lite-dominos-chez.png)
+
 # Setup
 
     $ cd ~/scheme # Where '~/scheme' is the path to your Scheme libraries
