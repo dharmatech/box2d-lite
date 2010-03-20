@@ -6,8 +6,6 @@ Erin Catto. [Box2D Lite](http://box2d.googlecode.com/files/Box2D_Lite.zip)
 is a simpler version which Erin posted to his blog once upon a
 time. This is a port of Box2D Lite to R6RS Scheme.
 
-![dominos screenshot](http://dharmatech.github.com/images/box2d-lite-dominos-chez.png)
-
 # Setup
 
     $ cd ~/scheme # Where '~/scheme' is the path to your Scheme libraries
@@ -35,3 +33,6 @@ time. This is a port of Box2D Lite to R6RS Scheme.
 
     $ ikarus --compile-dependencies ~/scheme/box2d-lite/demos/small-pyramid.sps
 
+## Screenshot
+
+![dominos screenshot](http://dharmatech.github.com/images/box2d-lite-dominos-chez.png)
