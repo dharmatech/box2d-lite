@@ -2,7 +2,6 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (import (rnrs)
-	(srfi :27 random-bits)
 	(gl)
 	(glut)
         (dharmalab misc limit-call-rate)
@@ -12,7 +11,8 @@
 	(box2d-lite vec)
 	(box2d-lite mat)
 	(box2d-lite body)
-	(box2d-lite world))
+	(box2d-lite world)
+        (srfi :27 random-bits))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
