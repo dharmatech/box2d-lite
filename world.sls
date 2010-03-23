@@ -7,7 +7,7 @@
 	  world::step)
 
   (import (except (rnrs) remove)
-	  (only (srfi :1 lists) remove)
+	  (only (surfage s1 lists) remove)
 	  (box2d-lite util define-record-type)
 	  (box2d-lite util say)
 	  (box2d-lite vec)

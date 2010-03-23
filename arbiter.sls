@@ -25,7 +25,7 @@
 	  )
 
   (import (rnrs)
-	  (srfi :27)
+	  (surfage s27 random-bits)
 	  (gl)
 	  (agave glamour misc)
 	  (dharmalab misc is-vector)

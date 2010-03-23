@@ -9,7 +9,7 @@ time. This is a port of Box2D Lite to R6RS Scheme.
 # Setup
 
     $ cd ~/scheme # Where '~/scheme' is the path to your Scheme libraries
-    $ bzr branch lp:~scheme-libraries-team/scheme-libraries/srfi
+    $ git clone git://github.com/dharmatech/surfage.git
     $ git clone git://github.com/dharmatech/dharmalab.git
     $ git clone git://github.com/dharmatech/agave.git
 

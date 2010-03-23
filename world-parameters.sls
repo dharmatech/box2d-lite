@@ -6,7 +6,7 @@
 	  position-correction)
 
   (import (rnrs)
-	  (srfi :39 parameters))
+	  (surfage s39 parameters))
 
   ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

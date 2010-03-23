@@ -13,7 +13,7 @@
 	(box2d-lite body)
 	(box2d-lite joint)
 	(box2d-lite world)
-        (srfi :27 random-bits))
+        (surfage s27 random-bits))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
