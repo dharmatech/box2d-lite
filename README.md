@@ -35,4 +35,4 @@ time. This is a port of Box2D Lite to R6RS Scheme.
 
 ## Screenshot
 
-![dominos screenshot](http://dharmatech.github.com/images/box2d-lite-dominos-chez.png)
+![dominos screenshot](https://raw.githubusercontent.com/dharmatech/dharmatech.github.com/master/images/box2d-lite-dominos-chez.png)
