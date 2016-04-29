@@ -29,7 +29,14 @@ time. This is a port of Box2D Lite to R6RS Scheme.
 
 # Notes
 
+## Chez Scheme
+
 OpenGL library for Chez Scheme: [chez-gl](https://github.com/dharmatech/chez-gl).
+
+On my system, I keep R6RS libraries in `~/scheme`. I keep chez-gl in `~/src`.
+So my `CHEZSCHEMELIBDIRS` is set like this in my `~/.bashrc`:
+
+    export CHEZSCHEMELIBDIRS=~/scheme:~/src/chez-gl
 
 ## Make a demo load faster in Ikarus
 
